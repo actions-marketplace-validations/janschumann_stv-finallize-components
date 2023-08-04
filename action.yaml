@@ -1,0 +1,18 @@
+name: stv-finallize-components
+description: Action to update pkg directory
+
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/download-artifact@v3
+    with:
+      name: components
+      path: pkg
+  - run: |
+      echo "components:" > pkg/stv.yml
+      for c in $(find pkg/ -name "*-v*.zip")
+      do
+        echo "  - $(basename $c | sed 's/.zip//')" >> pkg/stv.yml
+      done
+      cat pkg/stv.yml
+      ls -la pkg/
