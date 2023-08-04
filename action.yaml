@@ -16,3 +16,4 @@ runs:
       done
       cat pkg/stv.yml
       ls -la pkg/
+    shell: bash
